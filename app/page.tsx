@@ -3,32 +3,28 @@ import Image from "next/image";
 import type { Cart } from "./api/route";
 import { revalidateTag } from "next/cache";
 
-const apiUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-	? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api`
-	: "http://localhost:3000/api";
-
 export default async function Home() {
-	const cart = await fetch(apiUrl, {
-		next: { tags: ["cart"] },
-		cache: "no-store",
-	}).then((res) => res.json());
-
-	async function addToCart() {
-		"use server";
-
-		await fetch(apiUrl, {
-			method: "POST",
-			body: JSON.stringify({ name: "bottle" } satisfies Cart[0]),
-		}).then((res) => res.json());
-
-		revalidateTag("cart");
-	}
+	// const cart = await fetch(apiUrl, {
+	// 	next: { tags: ["cart"] },
+	// 	cache: "no-store",
+	// }).then((res) => res.json());
+	//
+	// async function addToCart() {
+	// 	"use server";
+	//
+	// 	await fetch(apiUrl, {
+	// 		method: "POST",
+	// 		body: JSON.stringify({ name: "bottle" } satisfies Cart[0]),
+	// 	}).then((res) => res.json());
+	//
+	// 	revalidateTag("cart");
+	// }
 
 	return (
 		<>
 			<nav className="border-b p-4 flex justify-end">
 				<div className="font-mono p-1 border rounded h-8 w-8 text-center">
-					{cart.length}
+					0
 				</div>
 			</nav>
 			<main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -50,11 +46,11 @@ export default async function Home() {
 							reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit
 							ex esse exercitation amet.
 						</p>
-						<form action={addToCart}>
-							<Button type="submit" className="mt-4">
-								BUY ME!
-							</Button>
-						</form>
+						{/* <form action={addToCart}> */}
+						{/* 	<Button type="submit" className="mt-4"> */}
+						{/* 		BUY ME! */}
+						{/* 	</Button> */}
+						{/* </form> */}
 					</div>
 				</div>
 			</main>
